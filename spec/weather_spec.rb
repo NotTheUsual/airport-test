@@ -27,4 +27,9 @@ describe WeatheredThing do
 		expect(random_weather_reports).not_to eq(just_sunny)
 	end
 
+	it "should know when it's stormy" do
+		airport.stub(:check_weather) { :stormy }
+		expect(airport).to have_inclement_weather
+	end
+
 end

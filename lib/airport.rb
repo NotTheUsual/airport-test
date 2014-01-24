@@ -5,19 +5,29 @@ class Airport
 
 	attr_reader :capacity, :planes
 
-	def initialize(capacity: 50)
+	def initialize(capacity: 20)
 		@capacity = capacity
 		@planes = []
 	end
 
-	def land(plane)
+	def try_to_land(plane)
+		raise "Owing to inclement weather, we cannot allow planes to land at this time. You have our deepest apologies for any inconvenience." if has_inclement_weather?
 		raise "This airport is currently full, sorry" if full?
 		plane.land
+		dock(plane)
+	end
+
+	def dock(plane)
 		@planes << plane
 	end
 
-	def eject(plane)
+	def try_to_eject(plane)
+		raise "Owing to inclement weather, we cannot allow planes to take off at this time. You have our deepest apologies for any inconvenience." if has_inclement_weather?
+		eject(plane)
 		plane.fly
+	end
+
+	def eject(plane)
 		@planes.delete(plane)
 	end
 
