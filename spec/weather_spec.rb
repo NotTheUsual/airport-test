@@ -6,7 +6,7 @@ describe WeatheredThing do
 	let(:airport) {WeatheredThing.new}
 
 	it "should be able to get the status of the weather" do
-		expect(airport.check_weather).not_to raise_error
+		expect{airport.check_weather}.not_to raise_error
 	end
 
 	it "should only return sunny or stormy" do
