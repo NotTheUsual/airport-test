@@ -1,8 +1,13 @@
 require 'airport'
 
 describe Airport do
-	let(:airport) { Airport.new }
-	let(:plane)   { double :plane, land: :landed, fly: :flying }
+	let(:airport) 			{ Airport.new }
+	let(:small_airport) { Airport.new(capacity: 2) }
+	let(:plane)   			{ double :plane, land: :landed, fly: :flying }
+
+	def fill_airport(airport)
+		airport.capacity.times { airport.land(Plane.new) }
+	end
 
 	it "should have a capacity of 50 when created" do
 		expect(airport.capacity).to eq(50)
@@ -13,7 +18,7 @@ describe Airport do
 		expect(big_airport.capacity).to eq(100)
 	end
 
-	context "(taking off and landing)" do
+	context "(basic taking off and landing)" do
 		
 		it "should be able to land a plane" do
 			expect{airport.land(plane)}.not_to raise_error
@@ -45,6 +50,34 @@ describe Airport do
 			expect(airport.planes).not_to include(plane)
 		end
 
+	end
+
+	context "(capacity controll)" do
+
+		it "should know how many planes it has" do
+			expect(airport.current_number_of_planes).to eq(0)
+			airport.land(plane)
+		end
+
+		it "should know when it's full" do
+			expect(small_airport).not_to be_full
+			fill_airport(small_airport)
+			expect(small_airport).to be_full
+		end
+
+		it "should stop planes landing when full" do
+			fill_airport(small_airport)
+			expect{small_airport.land(plane)}.to raise_error
+		end
+
+	end
+
+	context "weather conditions" do
+		
+		it "should know what the weather is" do
+			expect([:sunny, :stormy]).to include(airport.check_weather)
+		end
+		
 	end
 
 end
