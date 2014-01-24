@@ -24,6 +24,11 @@ describe Airport do
 			airport.land(plane)
 		end
 
+		it "should store a plane when it's landed" do
+			airport.land(plane)
+			expect(airport.planes).to include(plane)
+		end
+
 		it "should be able to get a plane to take off" do
 			expect{airport.eject(plane)}.not_to raise_error
 		end
@@ -31,6 +36,13 @@ describe Airport do
 		it "should tell a plane to fly when it gets it to take off" do
 			expect(plane).to receive(:fly)
 			airport.eject(plane)
+		end
+
+		it "should remove a plane form storage when it takes off" do
+			airport.land(plane)
+			expect(airport.planes).to include(plane)
+			airport.eject(plane)
+			expect(airport.planes).not_to include(plane)
 		end
 
 	end
