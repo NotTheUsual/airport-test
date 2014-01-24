@@ -19,6 +19,10 @@ describe Airport do
 	end
 
 	context "(basic taking off and landing)" do
+
+		before do
+			airport.stub(:check_weather) { :sunny }
+		end
 		
 		it "should be able to land a plane" do
 			expect{ airport.try_to_land(plane) }.not_to raise_error
@@ -53,6 +57,10 @@ describe Airport do
 	end
 
 	context "(capacity control)" do
+
+		before do
+			Airport.any_instance.stub(:check_weather) { :sunny }
+		end
 
 		it "should know how many planes it has" do
 			expect(airport.current_number_of_planes).to eq(0)
