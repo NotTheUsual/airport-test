@@ -12,6 +12,7 @@ describe Plane do
 	end
 
 	it "should be able to take off" do
+		plane.land
 		plane.fly
 		expect(plane.status).to eq(:flying)
 	end

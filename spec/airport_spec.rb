@@ -33,7 +33,7 @@ describe Airport do
 			airport.try_to_land(plane)
 		end
 
-		it "should store a plane when it's landed" do
+		it "should dock a plane when it's landed" do
 			airport.try_to_land(plane)
 			expect(airport.planes).to include(plane)
 		end
@@ -47,7 +47,7 @@ describe Airport do
 			airport.try_to_eject(plane)
 		end
 
-		it "should remove a plane form storage when it takes off" do
+		it "should eject a plane form storage when it takes off" do
 			airport.try_to_land(plane)
 			expect(airport.planes).to include(plane)
 			airport.try_to_eject(plane)

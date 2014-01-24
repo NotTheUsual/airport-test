@@ -11,7 +11,7 @@ class Airport
 	end
 
 	def try_to_land(plane)
-		raise "Owing to inclement weather, we cannot allow planes to land at this time. You have our deepest apologies for any inconvenience." if has_inclement_weather?
+		raise "Planes cannot land in inclement weather, sorry" if has_inclement_weather?
 		raise "This airport is currently full, sorry" if full?
 		plane.land
 		dock(plane)
@@ -22,7 +22,7 @@ class Airport
 	end
 
 	def try_to_eject(plane)
-		raise "Owing to inclement weather, we cannot allow planes to take off at this time. You have our deepest apologies for any inconvenience." if has_inclement_weather?
+		raise "Planes cannot land in inclement weather, sorry" if has_inclement_weather?
 		eject(plane)
 		plane.fly
 	end
