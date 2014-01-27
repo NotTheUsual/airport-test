@@ -35,7 +35,7 @@ describe Airport do
 
 		it "should dock a plane when it's landed" do
 			airport.try_to_land(plane)
-			expect(airport.planes).to include(plane)
+			expect(airport.planes).to include(plane) # well done for using include instead of just checking the number
 		end
 
 		it "should be able to get a plane to take off" do
@@ -64,7 +64,7 @@ describe Airport do
 
 		it "should know how many planes it has" do
 			expect(airport.current_number_of_planes).to eq(0)
-			airport.try_to_land(plane)
+			airport.try_to_land(plane) # why do this if there are no expectation afterwards?
 		end
 
 		it "should know when it's full" do
@@ -82,6 +82,8 @@ describe Airport do
 
 	context "(weather conditions)" do
 		
+		# This test may occasionally pass even if check_weather returns unexpected values
+		# I wouldn't write it at all, though.
 		it "should know what the weather is" do
 			expect([:sunny, :stormy]).to include(airport.check_weather)
 		end
